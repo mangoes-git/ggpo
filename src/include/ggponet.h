@@ -8,6 +8,21 @@
 #ifndef _GGPONET_H_
 #define _GGPONET_H_
 
+#if defined(_MSC_VER)
+    //  Microsoft
+    #define EXPORT __declspec(dllexport)
+#elif defined(APPLE) || defined(__GNUC__)
+    //  GCC
+    #define EXPORT __attribute__((visibility("default")))
+#else
+    //  do nothing and hope for the best?
+    #define EXPORT
+#endif
+
+#ifdef __GNUC__
+#define __cdecl __attribute__((cdecl))
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

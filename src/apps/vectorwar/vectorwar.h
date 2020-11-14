@@ -1,7 +1,11 @@
 #ifndef _VECTORWAR_H
 #define _VECTORWAR_H
 
+#include <stdint.h>
+
+#include "SDL2/SDL.h"
 #include "ggponet.h"
+#include "platform_helpers.h"
 
 /*
  * vectorwar.h --
@@ -19,11 +23,11 @@ enum VectorWarInputs {
    INPUT_BOMB              = (1 << 5),
 };
 
-void VectorWar_Init(HWND hwnd, unsigned short localport, int num_players, GGPOPlayer *players, int num_spectators);
-void VectorWar_InitSpectator(HWND hwnd, unsigned short localport, int num_players, char *host_ip, unsigned short host_port);
+void VectorWar_Init(int localport, int num_players, GGPOPlayer *players, int num_spectators);
+void VectorWar_InitSpectator(int localport, int num_players, char *host_ip, int host_port);
 void VectorWar_DrawCurrentFrame();
 void VectorWar_AdvanceFrame(int inputs[], int disconnect_flags);
-void VectorWar_RunFrame(HWND hwnd);
+int VectorWar_RunFrame(int input);
 void VectorWar_Idle(int time);
 void VectorWar_DisconnectPlayer(int player);
 void VectorWar_Exit();

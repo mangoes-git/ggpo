@@ -24,9 +24,24 @@ set(GGPO_LIB_SRC_NOFILTER
 )
 
 if(UNIX)
+		SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++11")
+
+	if(APPLE)
+		SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fdeclspec")
+	endif(APPLE)
+
 	set(GGPO_LIB_SRC_NOFILTER
 		${GGPO_LIB_SRC_NOFILTER}
-		"lib/ggpo/platform_linux.cpp"
+		"lib/ggpo/platform_unix.h"
+		"lib/ggpo/platform_unix.cpp"
+		"lib/ggpo/pevents.h"
+		"lib/ggpo/pevents.cpp"
+	)
+else(WIN32)
+	set(GGPO_LIB_SRC_NOFILTER
+		${GGPO_LIB_SRC_NOFILTER}
+		"lib/ggpo/platform_windows.h"
+		"lib/ggpo/platform_windows.cpp"
 	)
 endif()
 
