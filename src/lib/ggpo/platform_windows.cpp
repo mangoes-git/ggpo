@@ -7,21 +7,9 @@
 
 #include "platform_windows.h"
 
-int
-Platform::GetConfigInt(const char* name)
+BOOL WINAPI
+DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-   char buf[1024];
-   if (GetEnvironmentVariable(name, buf, ARRAY_SIZE(buf)) == 0) {
-      return 0;
-   }
-   return atoi(buf);
-}
-
-bool Platform::GetConfigBool(const char* name)
-{
-   char buf[1024];
-   if (GetEnvironmentVariable(name, buf, ARRAY_SIZE(buf)) == 0) {
-      return false;
-   }
-   return atoi(buf) != 0 || _stricmp(buf, "true") == 0;
+   srand(Platform::GetCurrentTimeMS() + Platform::GetProcessID());
+   return TRUE;
 }

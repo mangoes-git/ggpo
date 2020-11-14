@@ -167,7 +167,6 @@ SyncTestBackend::RaiseSyncError(const char *fmt, ...)
    va_end(args);
 
    puts(buf);
-   OutputDebugStringA(buf);
    EndLog();
    DebugBreak();
 }
@@ -187,8 +186,8 @@ SyncTestBackend::BeginLog(int saving)
    EndLog();
 
    char filename[MAX_PATH];
-   CreateDirectoryA("synclogs", NULL);
-   sprintf_s(filename, ARRAY_SIZE(filename), "synclogs\\%s-%04d-%s.log",
+   Platform::CreateDirectory("synclogs", NULL);
+   sprintf(filename, "synclogs\\%s-%04d-%s.log",
            saving ? "state" : "log",
            _sync.GetFrameCount(),
            _rollingback ? "replay" : "original");
